@@ -1,0 +1,34 @@
+/**
+* https://leetcode.com/problems/roman-to-integer/submissions/2200180272
+*/
+public class Solution {
+    public int RomanToInt(string s) {
+        var romanCharArray = s.ToCharArray();
+
+        var symbolToValue = new Dictionary<char, int>(){
+            {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000}
+        };
+
+        int number = 0; 
+        
+        for (int i = 0; i < romanCharArray.Length; i++){
+            
+            var actualRomanValue = symbolToValue[romanCharArray[i]];
+
+            // Checks if value shouldn't be subtracted
+            if (i + 1 < romanCharArray.Length){
+                var nextRomanValue = symbolToValue[romanCharArray[i + 1]];
+
+                if (actualRomanValue < nextRomanValue){
+                    number += nextRomanValue - actualRomanValue;
+                    i++;
+                    continue;
+                }
+            }
+
+            number += actualRomanValue;
+        }
+
+        return number;
+    }
+}
