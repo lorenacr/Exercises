@@ -1,0 +1,43 @@
+/**
+* https://leetcode.com/problems/palindrome-number/submissions/2200104500
+*/
+public class Solution {
+    public bool IsPalindrome(int x) {
+        var numberAsArray = x.ToString().ToCharArray();
+        var arrayLength = numberAsArray.Length;
+        bool isPalindrome = true;
+        
+        for (int i = arrayLength - 1, j = 0; j < arrayLength; j++, i--){
+            if (numberAsArray[j] == numberAsArray[i]){
+                isPalindrome = true;
+            }
+            else {
+                isPalindrome = false;
+                return isPalindrome;
+            }
+        }
+
+        return isPalindrome;
+    }
+}
+
+
+
+/**
+* https://leetcode.com/problems/palindrome-number/submissions/2200106363
+*/
+public class Solution {
+    public bool IsPalindrome(int x) {
+        if (x < 0 || (x % 10 == 0 && x != 0))
+            return false;
+
+        int reversed = 0;
+
+        while (x > reversed) {
+            reversed = reversed * 10 + x % 10;
+            x /= 10;
+        }
+
+        return x == reversed || x == reversed / 10;
+    }
+}
